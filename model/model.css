@@ -20,7 +20,7 @@ h1 {
 .header {
 	height: 150px;
 	z-index: 1;
-	top: -410px;
+	margin: 0 auto;
 }
 .dontKnow {
 	position: absolute;
@@ -77,7 +77,7 @@ h1 {
 		width: 95%;
 	}
 	.header {
-		width: 100%;
+		width: 95%;
 	}
 	#dialogue {
 		width: 40%;
@@ -95,9 +95,13 @@ h1 {
 		width: 100%;
 	}
 	#dialogue {
-		width: 61%;
+		width: 60%;
 		height: 45px;
 		margin: 50px 0 0 0;
+	}
+	#content_container {
+		width: 95%;
+		height: 95%;
 	}
 }
 @media screen and (min-width: 800px) {
