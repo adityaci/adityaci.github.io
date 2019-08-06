@@ -71,6 +71,12 @@ h1 {
 	opacity: 1;
 	visibility: visible;
 }
+@media screen and (max-width: 349px) {
+	#content_container {
+		width: 95%;
+		height: 95%;
+	}
+}
 @media screen and (min-width: 350px) {
 	.wrapper {
 		width: 95%;
@@ -89,7 +95,7 @@ h1 {
 		height: 95%;
 	}
 }
-@media screen and (min-width: 800px) and (max-height: 400px){
+@media screen and (max-height: 400px){
 	.wrapper{
 		height: 100%;
 	}
@@ -108,7 +114,6 @@ h1 {
 	}
 	#content_container {
 		width: 95%;
-		height: 95%;
 	}
 }
 @media screen and (min-width: 800px) {
@@ -126,10 +131,14 @@ h1 {
 		padding-top: 15px;
 	}
 	#content_container {
-		width: 50%;
-		min-width: 550px;
-		height: 50%;
-		min-height: 500px;
+		width: 650px;
+		height: 500px;
+	}
+}
+@media screen and (min-width: 800px) and (max-height: 500px) {
+	#content_container {
+		width: 95%;
+		height: 95%;
 	}
 }
 .content {
