@@ -32,7 +32,6 @@ h1 {
 	float: left;
 }
 #dialogue {
-	height: 45px;
 	float: left;
 	background-color: #ddd;
 	border: 3px solid;
@@ -76,9 +75,11 @@ h1 {
 		width: 90%;
 	}
 	#dialogue {
-		width: 40%;
-		margin: 50px 20px 0 0;
+		width: 45%;
+		height: 60px;
+		margin: 30px 0 0;
 		padding-top: 10px;
+		padding-left: 10px;
 	}
 	#content_container {
 		width: 95%;
@@ -86,9 +87,13 @@ h1 {
 	}
 }
 @media screen and (min-width: 500px) {
+	.header {
+		width: 80%;
+	}
 	#dialogue {
-		width: 55%;
-		margin: 50px 20px 0 0;
+		width: 56%;
+		height: 45px;
+		margin: 50px 0 0 0;
 		padding-top: 10px;
 	}
 }
@@ -103,7 +108,7 @@ h1 {
 	}
 	#dialogue {
 		width: 60%;
-		margin: 50px 20px 0 0;
+		margin: 50px 0 0 0;
 		padding-top: 15px;
 	}
 	#content_container {
