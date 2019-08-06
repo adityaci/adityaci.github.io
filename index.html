@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="model/model.css">
+<script type="text/javascript" src="script/function.js"></script>
+<title>My Profile || Aditya Chandra Isdhianto</title>
+</head>
+<body>
+	<div class="header middle">
+		<img class="myHead" src="img/myHead.png">
+		<div class="dontKnow"></div>
+		<div id="dialogue"><span>Hello.. Welcome to My Site!<span></div>
+	</div>
+	<div class="bg_shadow middle">
+		<div class="spacer middle"></div>
+		<div class="container">
+			<div class="menu about" onclick="display('about')" onmouseover="changeDialogue('about')"><h1>About</h1></div>
+			<div class="menu skill" onclick="display('skill')" onmouseover="changeDialogue('skill')"><h1>Skills</h1></div>
+			<div class="menu portfolio" onclick="display('portfolio')" onmouseover="changeDialogue('portfolio')"><h1>Portfolio</h1></div>
+			<div class="menu contact" onclick="display('ontact')" onmouseover="changeDialogue('contact')"><h1>Contact</h1></div>
+		</div>
+	</div>
+	<div id="content_container" class="middle">
+		<div class="back" onclick="backToHome()">Back to home</div>
+		<div id="about" class="content">About</div>
+		<div id="skill" class="content">Skills</div>
+		<div id="portfolio" class="content">Portfolio</div>
+		<div id="contact" class="content">Contact</div>
+	</div>
+</body>
+</html>
