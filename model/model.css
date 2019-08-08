@@ -5,179 +5,211 @@ body {
 h1 {
 	font-family: Courier New, Lucida Console, Monospace;
 	font-variant: small-caps;
+	margin: 0;
 }
-.header {
-	width: 500px;
-	height: 150px;
-	padding-bottom: 20px;
-}
-.dontKnow {
-	position: absolute;
-	width: 30px;
-	height: 20px;
-	background-image: url("../img/dontKnow.png");
-	top: 50px;
-	left: 145px;
-}
-.myHead {
-	width: 160px;
-	float: left;
-}
-#dialogue {
-	width: 314px;
-	margin: 50px 0 0 0;
-	padding: 10px;
-	font-size: 1.1rem;
-	float: left;
-	background-color: #ddd;
-	border: 3px solid;
-	border-radius: 30px;
-	text-align: center;
-	line-height: normal;
-	font-family: Courier New, Lucida Console, Monospace;
-	font-weight: bolder;
-}
-.bg_shadow {
-	width: 496;
-	position: absolute;
-	height: 250px;
-	background-color: #00334a;
-	box-shadow: inset 2px 2px 10px 2px #000;
-	border: 2px solid;
-	border-radius: 70px;
-}
-.container {
-	margin: 25px;
-}
-#content_container {
-	width: 650px;
-	height: 500px;
-	background-color: #ddd;
-	box-shadow: 2px 2px 25px 2px #000;
-	border: 2px solid;
-	border-radius: 40px;
-	visibility: hidden;
-	opacity: 0;
-	-webkit-transition: opacity 600ms, visibility 600ms;
-	transition: opacity 600ms, visibility 600ms;
-	z-index: 2;
-	position: absolute;
-	margin: auto;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-#content_container.fade {
-	opacity: 1;
-	visibility: visible;
-}
-.content {
-	width: 95%;
-	height: 95%;
-	margin: 15px 0 0 20px;
-	display: none;
-	overflow: auto;
-}
-.back {
-	width:110px;
-	float: right;
-	background-color: #850000;
-	color: #ddd;
-	padding: 5px 10px;
-	border-radius: 20px;
-	position: absolute;
-	right: 10px;
-	top: -10px;
-	text-align: center;
-	font-family: Courier New, Lucida Console, Monospace;
-	font-variant: small-caps;
-	font-weight: bolder;
-}
-.back:hover {
-	background-color: darkgrey;
-	color: #850000;
-	cursor: pointer;
-}
-.menu {
-	width: 50%;
-	height: 90px;
-	float: left;
-	margin-bottom: 20px;
-	background-color: #ddd;
-}
-.menu:hover {
-	cursor: pointer;
-	color: #850000;
-}
-.menu:active {
-	background-color: darkgrey;
-	color: #00334a;
-}
-.about {
-	border-radius: 60px 0 0 60px;
-}
-.skill {
-	float: left;
-	border-radius: 0 60px 60px 0;
-}
-.portfolio {
-	border-radius: 60px 0 0 60px;
-}
-.contact {
-	float: left;
-	border-radius: 0 60px 60px 0;
-}
-.about:hover, .portfolio:hover {
-	margin-left: 5%;
-	width: 45%;
-}
-.skill:hover, .contact:hover {
-	width: 45%;
-}
-.about h1, .portfolio h1 {
-	margin: 25px;
-}
-.skill h1, .contact h1 {
-	text-align: right;
-	margin: 25px;
-}
-.spacer {
-	background-color: #00334e;
-	width: 15%;
-	height: 280px;
-	box-shadow: 0 15px 0px 0px #00334a, 0 -15px 0px 0px #00334a, 10px 0 15px -4px #000, -10px 0 15px -4px #000;
-	position: absolute;
-	margin: auto;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
+
 @media screen and (max-width: 800px) {
 	.wrapper {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		background-color: #000;
+		display: inline-block;
+	}
+	.header {
+		padding: 15px 10px;
+		float: left;
+		display: block;
 	}
 	.myHead {
+		width: 35%;
+		float: left;
+	}
+	.dontKnow {
 		display: none;
 	}
 	#dialogue {
-		display: none;
+		width: 55%;
+		margin: 20px 0 0 0;
+		float: left;
+		padding: 10px;
+		font-size: 0.9rem;
+		background-color: #ddd;
+		border: 2px solid;
+		border-radius: 10px;
+		text-align: center;
+		line-height: normal;
+		font-family: Courier New, Lucida Console, Monospace;
+		font-weight: bolder;
 	}
 	.bg_shadow {
-		display: none;
+		width: 100%;
+		float: left;
+	}
+	.container {
+		width: 95%;
+		margin: 0 auto;
 	}
 	.spacer {
 		display: none;
+	}
+	.menu {
+		width: 100%;
+		height: 50px;
+		background-color: #ddd;
+		text-align: center;
+		font-size: 0.7rem;
+		line-height: 50px;		
 	}
 }
 @media screen and (min-width: 800px) {
 	.wrapper {
 		width: 500px;
 		height: 450px;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	.header {
+		width: 500px;
+		height: 150px;
+		padding-bottom: 20px;
+	}
+	.dontKnow {
+		position: absolute;
+		width: 30px;
+		height: 20px;
+		background-image: url("../img/dontKnow.png");
+		top: 50px;
+		left: 145px;
+	}
+	.myHead {
+		width: 160px;
+		float: left;
+	}
+	#dialogue {
+		width: 314px;
+		margin: 50px 0 0 0;
+		padding: 10px;
+		font-size: 1.1rem;
+		float: left;
+		background-color: #ddd;
+		border: 3px solid;
+		border-radius: 30px;
+		text-align: center;
+		line-height: normal;
+		font-family: Courier New, Lucida Console, Monospace;
+		font-weight: bolder;
+	}
+	.bg_shadow {
+		width: 496;
+		position: absolute;
+		height: 250px;
+		background-color: #00334a;
+		box-shadow: inset 2px 2px 10px 2px #000;
+		border: 2px solid;
+		border-radius: 70px;
+	}
+	.container {
+		margin: 25px;
+	}
+	.content {
+		width: 95%;
+		height: 95%;
+		margin: 15px 0 0 20px;
+		display: none;
+		overflow: auto;
+	}
+	.back {
+		width:110px;
+		float: right;
+		background-color: #850000;
+		color: #ddd;
+		padding: 5px 10px;
+		border-radius: 20px;
+		position: absolute;
+		right: 10px;
+		top: -10px;
+		text-align: center;
+		font-family: Courier New, Lucida Console, Monospace;
+		font-variant: small-caps;
+		font-weight: bolder;
+	}
+	.back:hover {
+		background-color: darkgrey;
+		color: #850000;
+		cursor: pointer;
+	}
+	#content_container {
+		width: 650px;
+		height: 500px;
+		background-color: #ddd;
+		box-shadow: 2px 2px 25px 2px #000;
+		border: 2px solid;
+		border-radius: 40px;
+		visibility: hidden;
+		opacity: 0;
+		-webkit-transition: opacity 600ms, visibility 600ms;
+		transition: opacity 600ms, visibility 600ms;
+		z-index: 2;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	#content_container.fade {
+		opacity: 1;
+		visibility: visible;
+	}
+	.menu {
+		width: 50%;
+		height: 90px;
+		float: left;
+		margin-bottom: 20px;
+		background-color: #ddd;
+	}
+	.menu:hover {
+		cursor: pointer;
+		color: #850000;
+	}
+	.menu:active {
+		background-color: darkgrey;
+		color: #00334a;
+	}
+	.about {
+		border-radius: 60px 0 0 60px;
+	}
+	.skill {
+		float: left;
+		border-radius: 0 60px 60px 0;
+	}
+	.portfolio {
+		border-radius: 60px 0 0 60px;
+	}
+	.contact {
+		float: left;
+		border-radius: 0 60px 60px 0;
+	}
+	.about:hover, .portfolio:hover {
+		margin-left: 5%;
+		width: 45%;
+	}
+	.skill:hover, .contact:hover {
+		width: 45%;
+	}
+	.about h1, .portfolio h1 {
+		margin: 25px;
+	}
+	.skill h1, .contact h1 {
+		text-align: right;
+		margin: 25px;
+	}
+	.spacer {
+		background-color: #00334e;
+		width: 15%;
+		height: 280px;
+		box-shadow: 0 15px 0px 0px #00334a, 0 -15px 0px 0px #00334a, 10px 0 15px -4px #000, -10px 0 15px -4px #000;
 		position: absolute;
 		margin: auto;
 		top: 0;
