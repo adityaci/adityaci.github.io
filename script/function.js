@@ -29,7 +29,9 @@ function changeDialogue( param ){
 		dialogue = "And.. that's my skills info, click it!";
 	else if( param == "portfolio" )
 		dialogue = "That's for my portfolio, click it!";
-	else
+	else if( param == "contact" )
 		dialogue = "Contact me, hope we can have fun!";
+	else
+		dialogue = "Hello.. Welcome to My Site!";
 	document.getElementById("dialogue").innerHTML = dialogue;
 }

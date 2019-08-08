@@ -6,21 +6,10 @@ h1 {
 	font-family: Courier New, Lucida Console, Monospace;
 	font-variant: small-caps;
 }
-.middle {
-	position: absolute;
-	margin: auto;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-.wrapper {
-	height: 400px;
-}
 .header {
+	width: 500px;
 	height: 150px;
-	z-index: 1;
-	margin: 0 auto;
+	padding-bottom: 20px;
 }
 .dontKnow {
 	position: absolute;
@@ -28,13 +17,17 @@ h1 {
 	height: 20px;
 	background-image: url("../img/dontKnow.png");
 	top: 50px;
-	left: 140px;
+	left: 145px;
 }
 .myHead {
-	height: 100%;
+	width: 160px;
 	float: left;
 }
 #dialogue {
+	width: 314px;
+	margin: 50px 0 0 0;
+	padding: 10px;
+	font-size: 1.1rem;
 	float: left;
 	background-color: #ddd;
 	border: 3px solid;
@@ -45,7 +38,7 @@ h1 {
 	font-weight: bolder;
 }
 .bg_shadow {
-	width: 100%;
+	width: 496;
 	position: absolute;
 	height: 250px;
 	background-color: #00334a;
@@ -57,6 +50,8 @@ h1 {
 	margin: 25px;
 }
 #content_container {
+	width: 650px;
+	height: 500px;
 	background-color: #ddd;
 	box-shadow: 2px 2px 25px 2px #000;
 	border: 2px solid;
@@ -66,83 +61,16 @@ h1 {
 	-webkit-transition: opacity 600ms, visibility 600ms;
 	transition: opacity 600ms, visibility 600ms;
 	z-index: 2;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 #content_container.fade {
 	opacity: 1;
 	visibility: visible;
-}
-@media screen and (max-width: 349px) {
-	#content_container {
-		width: 95%;
-		height: 95%;
-	}
-}
-@media screen and (min-width: 350px) {
-	.wrapper {
-		width: 95%;
-	}
-	.header {
-		width: 95%;
-	}
-	#dialogue {
-		width: 40%;
-		height: 60px;
-		margin: 30px 0 0 0;
-		padding: 10px 10px 0 10px;
-		font-size: 0.9rem;
-	}
-	#content_container {
-		width: 95%;
-		height: 95%;
-	}
-}
-@media screen and (max-height: 400px){
-	.wrapper{
-		height: 100%;
-	}
-	#content_container {
-		height: 95%;
-	}
-}
-@media screen and (min-width: 500px) {
-	.header {
-		width: 100%;
-	}
-	#dialogue {
-		width: 60%;
-		height: 45px;
-		margin: 50px 0 0 0;
-		font-size: 1.1rem;
-	}
-	#content_container {
-		width: 95%;
-	}
-}
-@media screen and (min-width: 800px) {
-	.wrapper {
-		width: 30%;
-		min-width: 500px;
-	}
-	.header {
-		width: 100%;
-		min-width: 470px;
-	}
-	#dialogue {
-		width: 60%;
-		margin: 50px 0 0 0;
-		padding-top: 15px;
-		font-size: 1.1rem;
-	}
-	#content_container {
-		width: 650px;
-		height: 500px;
-	}
-}
-@media screen and (min-width: 800px) and (max-height: 500px) {
-	#content_container {
-		width: 95%;
-		height: 95%;
-	}
 }
 .content {
 	width: 95%;
@@ -217,6 +145,44 @@ h1 {
 .spacer {
 	background-color: #00334e;
 	width: 15%;
-	height: 110%;
+	height: 280px;
 	box-shadow: 0 15px 0px 0px #00334a, 0 -15px 0px 0px #00334a, 10px 0 15px -4px #000, -10px 0 15px -4px #000;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+@media screen and (max-width: 800px) {
+	.wrapper {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-color: #000;
+	}
+	.myHead {
+		display: none;
+	}
+	#dialogue {
+		display: none;
+	}
+	.bg_shadow {
+		display: none;
+	}
+	.spacer {
+		display: none;
+	}
+}
+@media screen and (min-width: 800px) {
+	.wrapper {
+		width: 500px;
+		height: 450px;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
 }
