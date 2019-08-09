@@ -1,5 +1,9 @@
 function display( param ){
-	document.getElementById("content_container").classList.toggle("fade");
+	closeAllContent();
+	if( getComputedStyle(document.querySelector('.spacer')).display === "none" )
+		document.getElementById("content_container").style.display = "block";
+	else
+		document.getElementById("content_container").classList.toggle("fade");
 	if( param == "about" )
 		document.getElementById("about").style.display = "block";
 	else if( param == "skill" )
@@ -8,6 +12,7 @@ function display( param ){
 		document.getElementById("portfolio").style.display = "block";
 	else
 		document.getElementById("contact").style.display = "block";
+	document.getElementById('content_container').scrollIntoView()
 }
 
 function closeAllContent(){
@@ -18,7 +23,10 @@ function closeAllContent(){
 
 function backToHome(){
 	closeAllContent();
-	document.getElementById("content_container").classList.toggle("fade");
+	if( getComputedStyle(document.querySelector('.spacer')).display === "none" )
+		document.getElementById("content_container").removeAttribute("style");
+	else
+		document.getElementById("content_container").classList.toggle("fade");
 }
 
 function changeDialogue( param ){
