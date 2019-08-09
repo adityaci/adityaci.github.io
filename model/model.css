@@ -10,16 +10,16 @@ h1 {
 
 @media screen and (max-width: 800px), (min-width: 800px) and (max-height: 500px) {
 	.wrapper {
-		width: 100%;
-		display: inline-block;
+		width: 90%;
+		margin: 15px auto;
 	}
 	.header {
-		width: 85%;
-		margin: 10px auto;
+		width: 90%;
+		margin: 15px auto;
 		padding: 15px;
 		box-shadow: inset 2px 2px 10px 2px #000;
 		border: 2px solid;
-		border-radius: 20px;
+		border-radius: 20px 20px 0 0;
 	}
 	.myHead {
 		display: none;
@@ -41,23 +41,27 @@ h1 {
 		font-weight: bolder;
 	}
 	.bg_shadow {
-		width: 100%;
-		float: left;
+		width: 90%;
+		margin: 0px auto;
+		padding: 15px;
+		box-shadow: inset 2px 2px 10px 2px #000;
+		border: 2px solid;
+		border-radius: 0 0 20px 20px;
 	}
 	.container {
-		width: 95%;
+		width: 100%;
 		margin: 0 auto;
 	}
 	.spacer {
 		display: none;
 	}
 	.menu {
-		width: 100%;
-		height: 50px;
+		width: 90%;
+		padding: 10px;
+		margin: 5px auto;
 		background-color: #ddd;
 		text-align: center;
-		font-size: 0.7rem;
-		line-height: 50px;		
+		font-size: 0.7rem;	
 	}
 }
 @media screen and (min-width: 800px) and (min-height: 600px) {
