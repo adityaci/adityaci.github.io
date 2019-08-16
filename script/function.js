@@ -32,11 +32,11 @@ function backToHome(){
 function changeDialogue( param ){
 	var dialogue = "";
 	if( param == "about" )
-		dialogue = "Wanna know about me ? click it!";
+		dialogue = "Wanna know about me ?";
 	else if( param == "skill" )
-		dialogue = "And.. that's my skills info, click it!";
+		dialogue = "And.. that's my skills info.";
 	else if( param == "portfolio" )
-		dialogue = "That's for my portfolio, click it!";
+		dialogue = "That's for my portfolio.";
 	else if( param == "contact" )
 		dialogue = "Contact me, hope we can have fun!";
 	else
