@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>	
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="model/model.css">
+<script type="text/javascript" src="script/function.js"></script>
+<title>My Profile || Aditya Chandra Isdhianto</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<img class="myHead" src="img/myHead.png" onmouseover="changeDialogue('home')">
+			<div class="dontKnow"></div>
+			<div id="dialogue">Hello.. Welcome to My Site!</div>
+		</div>
+		<div class="bg_shadow">
+			<div class="spacer"></div>
+			<div class="container">
+				<div class="menu about" onclick="display('about')" onmouseover="changeDialogue('about')"><h1>About</h1></div>
+				<div class="menu skill" onclick="display('skill')" onmouseover="changeDialogue('skill')"><h1>Skills</h1></div>
+				<div class="menu portfolio" onclick="display('portfolio')" onmouseover="changeDialogue('portfolio')"><h1>Portfolio</h1></div>
+				<div class="menu contact" onclick="display('ontact')" onmouseover="changeDialogue('contact')"><h1>Contact</h1></div>
+			</div>
+		</div>
+	</div>
+	<div id="content_container">
+		<div class="back" onclick="backToHome()">Close</div>
+		<div id="about" class="content">About</div>
+		<div id="skill" class="content">Skills</div>
+		<div id="portfolio" class="content">Portfolio</div>
+		<div id="contact" class="content">Contact</div>
+	</div>
+</body>
+</html>
