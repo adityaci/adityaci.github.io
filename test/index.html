@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Render PDF as Images</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.3.93/pdf_viewer.min.css">
 </head>
 <body>
 
     <div id="container" style="width: 200px; height: 200px; background-color: #fff; color: brown;"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.3.93/pdf.min.mjs"></script>
+    <script type="text/javascript" src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script>
         ( () => {
             const pdfUrl = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
 
-            // PDFJS.disableWorker =
+            PDFJS.disableWorker = true
             document.getElementById('container').innerText = 'pdf.numPages'
             // PDFJS.getDocument( pdfUrl )
             //     .then( (pdf) => {
