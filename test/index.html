@@ -9,13 +9,21 @@
 </head>
 <body>
 
-    <div id="container" style="width: 200px;height: 200px;background-color: #fff;"></div>
+    <div id="container"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.3.93/pdf.min.mjs"></script>
     <script>
         ( () => {
-            document.getElementById('container').innerText = 'asu'
-            alert('asu')
+            const pdfUrl = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
+
+            PDFJS.disableWorker = true;
+            PDFJS.getDocument( pdfUrl )
+                .then( (pdf) => {
+
+                    document.getElementById('container').innerText = pdf.numPages
+
+                })
+
         })();
     </script>
 </body>
