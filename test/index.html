@@ -10,20 +10,26 @@
 
     <div id="container" style="width: 200px; height: 200px; background-color: #000; color: brown;"></div>
 
-    <script type="text/javascript" src="https//mozilla.github.io/pdf.js/build/pdf.mjs"></script>
-    <script>
-        ( () => {
-            const pdfUrl = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
 
-            pdfjsLib.disableWorker = true
-            document.getElementById('container').innerText = 'pdf.numPages'
-            // PDFJS.getDocument( pdfUrl )
-            //     .then( (pdf) => {
+    <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 
+<script type="module">
+  // If absolute URL from the remote server is provided, configure the CORS
+  // header on that server.
+  var url = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf';
 
-            //     })
+  // Loaded via <script> tag, create shortcut to access PDF.js exports.
+  var { pdfjsLib } = globalThis;
 
-        })();
-    </script>
+  // The workerSrc property shall be specified.
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+
+  // Asynchronous download of PDF
+  var loadingTask = pdfjsLib.getDocument(url);
+  loadingTask.promise.then(function(pdf) {
+    alert(pdf.numPages)
+  });
+</script>
+
 </body>
 </html>
