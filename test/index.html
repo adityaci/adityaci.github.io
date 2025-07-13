@@ -5,31 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Render PDF as Images</title>
 
+    <style>
+        #container {
+            width: 250px;
+            height: 250px;
+            border: 2px solid;
+        }
+    </style>
 </head>
 <body>
 
-    <div id="container" style="width: 200px; height: 200px; background-color: #000; color: brown;"></div>
+    <div id="container"></div>
 
+    <script>
+        (() => {
+
+            renderPdfAsImage('', 'container')
+
+            var renderPdfAsImage = ( file = '', parentElementId ) => {
+
+                const parentEl      = document.getElementById( parentElementId )
+                const canvasWidth   = parentEl.offsetWidth
+                const canvasHeight  = parentEl.offsetHeight
+
+                var canvas      = document.createElement('canvas')
+                var context     = canvas.getContext('2d')
+                canvas.width    = canvasWidth
+                canvas.height   = canvasHeight
+
+                parentEl.appendChild( canvas )
+
+            }
+
+        })();
+    </script>
 
     <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 
-<script type="module">
-  // If absolute URL from the remote server is provided, configure the CORS
-  // header on that server.
-  var url = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf';
+    <script type="module">
+        const url = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
 
-  // Loaded via <script> tag, create shortcut to access PDF.js exports.
-  var { pdfjsLib } = globalThis;
+        var { pdfjsLib } = globalThis
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs'
 
-  // The workerSrc property shall be specified.
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+        var loadingTask = pdfjsLib.getDocument(url)
 
-  // Asynchronous download of PDF
-  var loadingTask = pdfjsLib.getDocument(url);
-  loadingTask.promise.then(function(pdf) {
-    alert(pdf.numPages)
-  });
-</script>
+        loadingTask.promise.then(function(pdf) {
+            // alert(pdf.numPages)
+        })
+
+    </script>
 
 </body>
 </html>
