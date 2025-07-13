@@ -10,12 +10,12 @@
 
     <div id="container" style="width: 200px; height: 200px; background-color: #000; color: brown;"></div>
 
-    <script type="text/javascript" src="https//mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script type="text/javascript" src="https//mozilla.github.io/pdf.js/build/pdf.mjs"></script>
     <script>
         ( () => {
             const pdfUrl = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
 
-            // PDFJS.disableWorker = true
+            pdfjsLib.disableWorker = true
             document.getElementById('container').innerText = 'pdf.numPages'
             // PDFJS.getDocument( pdfUrl )
             //     .then( (pdf) => {
