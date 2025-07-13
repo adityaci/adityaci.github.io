@@ -17,12 +17,12 @@
             const pdfUrl = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
 
             PDFJS.disableWorker = true
-            PDFJS.getDocument( pdfUrl )
-                .then( (pdf) => {
+            document.getElementById('container').innerText = 'pdf.numPages'
+            // PDFJS.getDocument( pdfUrl )
+            //     .then( (pdf) => {
 
-                    document.getElementById('container').innerText = 'pdf.numPages'
 
-                })
+            //     })
 
         })();
     </script>
