@@ -7,7 +7,14 @@
 
     <style>
         #container {
-            width: 100%;
+            width: 30%;
+            height: 600px;
+            border: 2px solid;
+            overflow-y: auto;
+        }
+
+        #container {
+            width: 70%;
             height: 600px;
             border: 2px solid;
             overflow-y: auto;
@@ -70,6 +77,7 @@
             }
 
             renderPdfAsImage('https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf', 'container')
+            renderPdfAsImage('https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf', 'container2')
 
         })()
     </script>
