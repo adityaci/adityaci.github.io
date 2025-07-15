@@ -7,9 +7,10 @@
 
     <style>
         #container {
-            width: 250px;
-            height: 250px;
+            width: 1024px;
+            height: 600px;
             border: 2px solid;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -17,46 +18,62 @@
 
     <div id="container"></div>
 
-    <script>
+    <script src="./js/pdfjs/pdf.mjs" type="module"></script>
+
+    <script type="module">
         (() => {
 
-            
-
             var renderPdfAsImage = ( file, parentElementId ) => {
+
+                const url = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
+
+                var { pdfjsLib } = globalThis
+                pdfjsLib.GlobalWorkerOptions.workerSrc = './js/pdfjs/pdf.worker.mjs'
+
+                var loadingTask = pdfjsLib.getDocument( url )
 
                 const parentEl      = document.getElementById( parentElementId )
                 const canvasWidth   = parentEl.offsetWidth
                 const canvasHeight  = parentEl.offsetHeight
 
-                var canvas      = document.createElement('canvas')
-                parentEl.appendChild( canvas )
-                var context     = canvas.getContext('2d')
-                canvas.width    = canvasWidth
-                canvas.height   = canvasHeight
+                loadingTask.promise.then( async ( pdf ) => {
+                    for( var i = 1; i <= pdf.numPages; i++ )
+                    {
+                        await pdf.getPage( i )
+                            .then( async page => {
+                                
+                                const scale     = 1.5;
+                                const viewport  = page.getViewport({ scale });
+                                var canvas      = document.createElement('canvas')
+                                var context     = canvas.getContext('2d')
 
-                alert(canvasWidth)
+                                const renderContext = {
+                                    canvasContext   : context,
+                                    viewport        : viewport
+                                }
+                                
+                                canvas.width        = viewport.width
+                                canvas.height       = viewport.height
+
+                                await page.render( renderContext ).promise.then( () => {
+                                    const img           = document.createElement('img')
+                                    img.src             = canvas.toDataURL('image/png')
+                                    img.style.width     = '100%'
+                                    img.style.margin    = '5px 0 5px 0'
+
+                                    parentEl.appendChild( img )
+
+                                    // console.log(i)
+                                })
+                            })
+                    }
+                })
 
             }
 
             renderPdfAsImage('', 'container')
 
         })()
-    </script>
-
-    <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
-
-    <script type="module">
-        const url = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
-
-        var { pdfjsLib } = globalThis
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs'
-
-        var loadingTask = pdfjsLib.getDocument(url)
-
-        loadingTask.promise.then(function(pdf) {
-            // alert(pdf.numPages)
-        })
-
     </script>
 
 </body>
