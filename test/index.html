@@ -25,12 +25,12 @@
 
             var renderPdfAsImage = ( file, parentElementId ) => {
 
-                const url = 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf'
+                const file = file
 
                 var { pdfjsLib } = globalThis
                 pdfjsLib.GlobalWorkerOptions.workerSrc = './js/pdfjs/pdf.worker.mjs'
 
-                var loadingTask = pdfjsLib.getDocument( url )
+                var loadingTask = pdfjsLib.getDocument( file )
 
                 const parentEl      = document.getElementById( parentElementId )
                 const canvasWidth   = parentEl.offsetWidth
@@ -71,7 +71,7 @@
 
             }
 
-            renderPdfAsImage('', 'container')
+            renderPdfAsImage('https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf', 'container')
 
         })()
     </script>
