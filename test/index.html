@@ -24,6 +24,13 @@
             float: left;
             box-sizing: border-box;
         }
+        .pdfimg {
+            width: 100%;
+            margin: 5px 8px 5px 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+
+        }
     </style>
 </head>
 <body>
@@ -67,11 +74,9 @@
                                 canvas.height       = viewport.height
 
                                 await page.render( renderContext ).promise.then( () => {
-                                    const img           = document.createElement('img')
-                                    img.src             = canvas.toDataURL('image/png')
-                                    img.style.width     = '100%'
-                                    img.style.margin    = '5px 8px 5px 8px'
-                                    img.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.3)'
+                                    const img       = document.createElement('img')
+                                    img.src         = canvas.toDataURL('image/png')
+                                    img.className   = 'pdfimg'
 
                                     parentEl.appendChild( img )
 
