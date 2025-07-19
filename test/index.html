@@ -20,7 +20,7 @@
         .container {
             height: 600px;
             border: 2px solid;
-            overflow-y: auto;
+            overflow: auto;
             float: left;
             box-sizing: border-box;
         }
@@ -29,7 +29,15 @@
             margin: 5px 10px 5px 10px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             box-sizing: border-box;
-
+        }
+        .image-container {
+            transform: scale(1);
+            transform-origin: top left;
+            transition: transform 0.3s ease;
+        }
+        .image-container.zoomed {
+            transform: scale(1.5);
+            transform-origin: top left;
         }
     </style>
 </head>
@@ -53,6 +61,13 @@
                 const parentEl      = document.getElementById( parentElementId )
                 const canvasWidth   = parentEl.offsetWidth
                 const canvasHeight  = parentEl.offsetHeight
+
+                const imgContainer  = document.createElement('div')
+                imgContainer.className = 'image-container'
+                imgContainer.onclick = () =>
+                {
+                    imgContainer.classList.toggle('zoomed')
+                }
 
                 loadingTask.promise.then( async ( pdf ) => {
                     for( var i = 1; i <= pdf.numPages; i++ )
@@ -78,13 +93,15 @@
                                     img.src         = canvas.toDataURL('image/png')
                                     img.className   = 'pdfimg'
 
-                                    parentEl.appendChild( img )
+                                    imgContainer.appendChild( img )
 
                                     // console.log(i)
                                 })
                             })
                     }
                 })
+
+                parentEl.appendChild( imgContainer )
 
             }
 
