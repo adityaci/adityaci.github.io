@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QR Scanner</title>
-
-  <style>
-    .container
-    {
-      display: flex;
-      width: 100%;
-      height: 300px;
-      justify-content: center;
-    }
-  </style>
+    <meta charset="utf-8"/>
+    <title>QuaggaJS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <style>
+        #camera video{
+            width:100%;
+            max-width: 640px;
+        }
+    </style>
 </head>
+
 <body>
-
-  <div class="container">
-    <video id="qrscanner"></video>
-  </div>
-
-  <script type="module">
-    import QrScanner from './qr-scanner.min.js';
-
-    const qrScanner = new QrScanner(
-    document.getElementById('qrscanner'),
-    result => alert('decoded qr code:', result),
-        {
-          preferredCamera: 'environment',
+<div id="camera" style="width:100%"></div>
+<script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
+<script>
+    const quaggaConf = {
+        inputStream: {
+            target: document.querySelector("#camera"),
+            type: "LiveStream",
+            constraints: {
+                width: { min: 640 },
+                height: { min: 480 },
+                facingMode: "environment",
+                aspectRatio: { min: 1, max: 2 }
+            }
         },
-    );
+        decoder: {
+            readers: ['code_128_reader']
+        },
+    }
 
-    qrScanner.start();
-  </script>
+    Quagga.init(quaggaConf, function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        Quagga.start();
+    });
 
+    Quagga.onDetected(function (result) {
+        alert("Detected barcode: " + result.codeResult.code);
+    });
+</script>
 </body>
 </html>
