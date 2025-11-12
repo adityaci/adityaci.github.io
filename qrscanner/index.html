@@ -64,7 +64,7 @@
       result.textContent = "📸 Accessing camera...";
       try {
         const devices = await codeReader.listVideoInputDevices();
-        alert(devices.text)
+        alert(JSON.stringify(devices))
         if (devices.length === 0) {
           result.textContent = "❌ No camera found";
           return;
