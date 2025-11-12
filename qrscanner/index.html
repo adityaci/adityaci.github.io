@@ -1,4 +1,57 @@
-<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barcode Scanner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f7f9fb;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    video {
+      width: 100%;
+      max-width: 420px;
+      border: 3px solid #444;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    #result {
+      margin-top: 15px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #2b9348;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <h1>📷 Barcode Scanner</h1>
+  <video id="video" autoplay playsinline></video>
+  <p id="result">Initializing camera...</p>
+  <button id="restart" style="display:none;">Scan Again</button>
+
+  <!-- Use ZXing minified UMD version from reliable CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
 <script>
   const codeReader = new ZXing.BrowserMultiFormatReader();
   const video = document.getElementById('video');
@@ -71,3 +124,6 @@
 
   startScanner();
 </script>
+
+</body>
+</html>
