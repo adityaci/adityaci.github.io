@@ -3,18 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barcode Scanner</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; background: #f7f9fb; margin: 0; padding: 20px; }
-    video { width: 100%; max-width: 420px; height:200px; border: 3px solid #444; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
-    #result { margin-top: 15px; font-size: 1.2em; font-weight: bold; color: #2b9348; }
-    button { margin-top: 20px; padding: 10px 20px; font-size: 1em; background: #0077cc; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #005fa3; }
-  </style>
+  <title>ZXing Barcode Scanner</title>
 </head>
 <body>
-  <h1>📷 Barcode Scanner</h1>
-  <video id="video" autoplay playsinline></video>
+  <h2>📷 ZXing Barcode Scanner</h2>
+  <video id="video" style="width:100%;max-width:400px;" autoplay playsinline></video>
   <p id="result">Initializing camera...</p>
   <button id="restart" style="display:none;">Scan Again</button>
 
@@ -24,18 +17,19 @@
     const video = document.getElementById('video');
     const result = document.getElementById('result');
     const restartBtn = document.getElementById('restart');
-    let scanning = true;
     let stream;
+    let scanning = true;
 
     async function startScanner() {
-      result.textContent = "📸 Accessing camera...";
+      result.textContent = "📸 Requesting camera access...";
+
       try {
-        // Stop any previous stream
+        // Stop any existing stream before starting a new one
         if (stream) {
           stream.getTracks().forEach(track => track.stop());
         }
 
-        // Try to use the back camera first
+        // Prefer the back camera
         const constraints = {
           audio: false,
           video: { facingMode: { ideal: "environment" } }
@@ -53,13 +47,14 @@
             const code = decoded.text;
             result.textContent = `✅ Scanned: ${code}`;
             codeReader.reset();
-            restartBtn.style.display = "inline-block";
             alert("Scanned: " + code);
+            restartBtn.style.display = "inline-block";
           }
         });
+
       } catch (error) {
-        console.error("Camera error:", error);
-        result.textContent = "⚠️ Error accessing camera. Please allow camera access and use Safari or Chrome.";
+        console.error("Camera access error:", error);
+        result.textContent = "⚠️ Error accessing camera. Make sure permissions are granted and use HTTPS.";
       }
     }
 
