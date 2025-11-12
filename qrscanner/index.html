@@ -5,43 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Barcode Scanner</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f7f9fb;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      color: #333;
-      margin-bottom: 10px;
-    }
-    video {
-      width: 100%;
-      max-width: 420px;
-      border: 3px solid #444;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-    #result {
-      margin-top: 15px;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #2b9348;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      background: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #005fa3;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; background: #f7f9fb; margin: 0; padding: 20px; }
+    video { width: 100%; max-width: 420px; border: 3px solid #444; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+    #result { margin-top: 15px; font-size: 1.2em; font-weight: bold; color: #2b9348; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 1em; background: #0077cc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #005fa3; }
   </style>
 </head>
 <body>
@@ -50,80 +18,58 @@
   <p id="result">Initializing camera...</p>
   <button id="restart" style="display:none;">Scan Again</button>
 
-  <!-- Use ZXing minified UMD version from reliable CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
-<script>
-  const codeReader = new ZXing.BrowserMultiFormatReader();
-  const video = document.getElementById('video');
-  const result = document.getElementById('result');
-  const restartBtn = document.getElementById('restart');
-  let scanning = true;
-  let currentDeviceId = null;
+  <script>
+    const codeReader = new ZXing.BrowserMultiFormatReader();
+    const video = document.getElementById('video');
+    const result = document.getElementById('result');
+    const restartBtn = document.getElementById('restart');
+    let scanning = true;
+    let stream;
 
-  async function startScanner() {
-    result.textContent = "📸 Accessing back camera...";
+    async function startScanner() {
+      result.textContent = "📸 Accessing camera...";
+      try {
+        // Stop any previous stream
+        if (stream) {
+          stream.getTracks().forEach(track => track.stop());
+        }
 
-    try {
-      // List all video input devices
-      const devices = await codeReader.listVideoInputDevices();
+        // Try to use the back camera first
+        const constraints = {
+          audio: false,
+          video: { facingMode: { ideal: "environment" } }
+        };
 
-      // Find back camera if available
-      const backCamera = devices.find(device =>
-        device.label.toLowerCase().includes('back')
-      );
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        video.play();
 
-      // Choose back camera if found, otherwise use first device
-      currentDeviceId = backCamera ? backCamera.deviceId : devices[0]?.deviceId;
+        result.textContent = "🟢 Point your camera at a barcode...";
 
-      if (!currentDeviceId) {
-        result.textContent = "❌ No camera found.";
-        return;
+        codeReader.decodeFromVideoDevice(null, video, (decoded, err) => {
+          if (decoded && scanning) {
+            scanning = false;
+            const code = decoded.text;
+            result.textContent = `✅ Scanned: ${code}`;
+            codeReader.reset();
+            restartBtn.style.display = "inline-block";
+            alert("Scanned: " + code);
+          }
+        });
+      } catch (error) {
+        console.error("Camera error:", error);
+        result.textContent = "⚠️ Error accessing camera. Please allow camera access and use Safari or Chrome.";
       }
-
-      result.textContent = "🟢 Point your back camera at a barcode...";
-
-      // Force the environment camera on iOS
-      const constraints = {
-        video: {
-          facingMode: { exact: "environment" },
-          deviceId: currentDeviceId ? { exact: currentDeviceId } : undefined
-        }
-      };
-
-      // Stop any previous stream
-      codeReader.reset();
-
-      // Manually start camera stream (to enforce constraints)
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      video.srcObject = stream;
-      video.play();
-
-      // Decode from that stream
-      codeReader.decodeFromVideoDevice(currentDeviceId, video, (decoded, err) => {
-        if (decoded && scanning) {
-          scanning = false;
-          const code = decoded.text;
-          result.textContent = `✅ Scanned: ${code}`;
-          codeReader.reset();
-          restartBtn.style.display = "inline-block";
-          alert("Scanned: " + code);
-        }
-      });
-
-    } catch (error) {
-      console.error(error);
-      result.textContent = "⚠️ Error accessing camera.";
     }
-  }
 
-  restartBtn.addEventListener('click', () => {
-    restartBtn.style.display = "none";
-    scanning = true;
+    restartBtn.addEventListener('click', () => {
+      restartBtn.style.display = "none";
+      scanning = true;
+      startScanner();
+    });
+
     startScanner();
-  });
-
-  startScanner();
-</script>
-
+  </script>
 </body>
 </html>
