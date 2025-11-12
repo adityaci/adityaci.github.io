@@ -1,47 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <title>QuaggaJS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-    <style>
-        #camera video{
-            width:100%;
-            max-width: 640px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loop Barcode Scanner</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    video { width: 100%; max-width: 400px; border: 2px solid #333; border-radius: 10px; }
+    #result { margin-top: 10px; font-size: 1.2rem; color: green; font-weight: bold; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 1rem; }
+  </style>
 </head>
-
 <body>
-<div id="camera" style="width:100%"></div>
-<script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
-<script>
-    const quaggaConf = {
-        inputStream: {
-            target: document.querySelector("#camera"),
-            type: "LiveStream",
-            constraints: {
-                width: { min: 640 },
-                height: { min: 480 },
-                facingMode: "environment",
-                aspectRatio: { min: 1, max: 2 }
-            }
-        },
-        decoder: {
-            readers: ['code_128_reader']
-        },
+  <h2>📷 Barcode Scanner</h2>
+  <video id="video" autoplay></video>
+  <p id="result">Waiting for scan...</p>
+  <button id="restart" style="display:none;">Scan Again</button>
+
+  <script type="module">
+    import { BrowserMultiFormatReader } from 'https://cdn.jsdelivr.net/npm/@zxing/library@latest/esm/index.min.js';
+
+    const video = document.getElementById('video');
+    const resultText = document.getElementById('result');
+    const restartBtn = document.getElementById('restart');
+    const codeReader = new BrowserMultiFormatReader();
+
+    let scanning = true;
+
+    // Start scanning loop
+    async function startScanner() {
+      resultText.textContent = "📸 Initializing camera...";
+      const devices = await codeReader.listVideoInputDevices();
+      const cameraId = devices[0]?.deviceId;
+
+      resultText.textContent = "🟢 Point your camera at a barcode...";
+
+      codeReader.decodeFromVideoDevice(cameraId, video, (result, err) => {
+        if (result && scanning) {
+          scanning = false;
+          resultText.textContent = `✅ Barcode: ${result.text}`;
+          codeReader.reset(); // stop scanning
+          restartBtn.style.display = 'inline-block';
+          handleScan(result.text);
+        }
+      });
     }
 
-    Quagga.init(quaggaConf, function (err) {
-        if (err) {
-            return console.log(err);
-        }
-        Quagga.start();
+    // Handle scanned barcode (example: send to backend)
+    async function handleScan(barcode) {
+      console.log('Scanned:', barcode);
+      // Example: simulate wait for processing
+      await new Promise(r => setTimeout(r, 1000));
+      alert(`You scanned: ${barcode}`);
+    }
+
+    // Restart scanning when user clicks button
+    restartBtn.addEventListener('click', () => {
+      restartBtn.style.display = 'none';
+      scanning = true;
+      startScanner();
     });
 
-    Quagga.onDetected(function (result) {
-        alert("Detected barcode: " + result.codeResult.code);
-    });
-</script>
+    startScanner();
+  </script>
 </body>
 </html>
