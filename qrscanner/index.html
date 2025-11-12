@@ -51,4 +51,49 @@
   <button id="restart" style="display:none;">Scan Again</button>
 
   <!-- Use ZXing minified UMD version from reliable CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/
+  <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
+
+  <script>
+    const codeReader = new ZXing.BrowserMultiFormatReader();
+    const video = document.getElementById('video');
+    const result = document.getElementById('result');
+    const restartBtn = document.getElementById('restart');
+    let scanning = true;
+
+    async function startScanner() {
+      result.textContent = "📸 Accessing camera...";
+      try {
+        const devices = await codeReader.listVideoInputDevices();
+        if (devices.length === 0) {
+          result.textContent = "❌ No camera found";
+          return;
+        }
+        const selectedDeviceId = devices[0].deviceId;
+        result.textContent = "🟢 Point your camera at a barcode...";
+
+        codeReader.decodeFromVideoDevice(selectedDeviceId, video, (decoded, err) => {
+          if (decoded && scanning) {
+            scanning = false;
+            const code = decoded.text;
+            result.textContent = `✅ Scanned: ${code}`;
+            codeReader.reset();
+            restartBtn.style.display = "inline-block";
+            alert("Scanned: " + code);
+          }
+        });
+      } catch (error) {
+        console.error(error);
+        result.textContent = "⚠️ Error accessing camera.";
+      }
+    }
+
+    restartBtn.addEventListener('click', () => {
+      restartBtn.style.display = "none";
+      scanning = true;
+      startScanner();
+    });
+
+    startScanner();
+  </script>
+</body>
+</html>
